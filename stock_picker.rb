@@ -17,35 +17,19 @@ def stock_picker(priceArray)
     # get this new array into our resultsArray
     resultsArray.insert(buyday,newmapArray)
   end
-
   p resultsArray # debugging output. "p" is useful (it calls inspect() on the array)
-
-  # ^ 1 would be the buyday array with highest profit
-  # 4 would be the array position of the sell day
   # first, find the highest profit buyday
-
   biggestProfit = resultsArray.flatten.max
   puts  "biggestProfit is $#{biggestProfit}"
-
+  # the position of the sub array in the main array == buyday
   buydayIndex = resultsArray.index(resultsArray.find{|element| element.include?(biggestProfit)})
   puts "buydayIndex is #{buydayIndex}"
-
-  # ensure gap is chronological for proper buy/sell timing
-  # the position of the sub array in the main array == buyday
   # the position of the highest profit day within the subarray == sellday
-  # have to adjust (+ buydayIndex at the end) because we skipped a sell day in the past, to get the correct index
+  # have to adjust (+ buydayIndex at the end) cuz we skip sell days in the past, to get the correct index
   selldayIndex = resultsArray[buydayIndex].index(biggestProfit) + buydayIndex
-
   puts "selldayIndex is #{selldayIndex}"
-
   # return the day pair as an array [1,4]
-
   p finalArray = [buydayIndex,selldayIndex]
-
 end
 
 stock_picker([17,3,6,9,15,8,6,1,10])
-
-    # puts priceArray[buyday+1] - buyprice # throws an error due to counting after the index ends
-
-    # Map wth range: https://www.delftstack.com/howto/ruby/map-array-with-index-in-ruby/#use-map-together-with-the-ruby-range
